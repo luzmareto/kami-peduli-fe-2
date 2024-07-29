@@ -35,7 +35,7 @@
     <!-- Tampilan home saat login -->
     <div class="flex ml-auto" v-else>
       <div class="dropdown inline-block relative z-10">
-        <button class="bg-white text-gray-700 font-semibold py-4 px-6 rounded inline-flex items-center ">
+        <button class="bg-white text-gray-700 font-semibold py-4 px-8 rounded inline-flex items-center ">
           <img v-if="$store.state.auth.user.image_url"
             :src="$axios.defaults.baseURL + '/' + $store.state.auth.user.image_url" alt=""
             class="h-8 rounded-full mr-2">
