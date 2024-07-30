@@ -158,26 +158,27 @@ export default {
     }
   },
   methods: {
-    async fund() {
-  try {
-    let response = await this.$axios.$post('/api/v1/transactions', this.transaction);
-    // Cek apakah respons berisi data yang benar
-    console.log(response);
-    if (response.data && response.data.payment_url) {
-      // Alihkan ke URL pembayaran
-      window.location.href = response.data.payment_url;
-    } else {
-      console.error('Payment URL tidak ditemukan dalam respons');
+  async fund() {
+    try {
+      let response = await this.$axios.$post('/api/v1/transactions', this.transaction);
+      // Cek apakah respons berisi data yang benar
+      console.log(response);
+      if (response.data && response.data.payment_url) {
+        // Alihkan ke URL pembayaran di tab baru
+        window.open(response.data.payment_url, '_blank');
+      } else {
+        console.error('Payment URL tidak ditemukan dalam respons');
+      }
+    } catch (err) {
+      console.error('Terjadi kesalahan:', err);
     }
-  } catch (err) {
-    console.error('Terjadi kesalahan:', err);
-  }
+  },
+
+  changeImage(url) {
+    this.default_image = url;
+  },
 },
 
-    changeImage(url) {
-      this.default_image = url
-    },
-  },
   mounted() {
     this.default_image =
       this.$axios.defaults.baseURL + '/' + this.campaign.data.image_url
